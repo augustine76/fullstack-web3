@@ -20,7 +20,7 @@ contract Blog {
     mapping(uint256 => Post) private idToPost;
     mapping(string => Post) private hashToPost;
 
-    event PostCreated(uint256 id, string title, string hash);
+    event PostCreated(uint256 id, string title, string hash, bool published);
     event PostUpdated(uint256 id, string title, string hash, bool published);
 
     constructor(string memory _name) {
@@ -58,11 +58,12 @@ contract Blog {
         post.published = true;
         post.content = hash;
         hashToPost[hash] = post;
-        emit PostCreated(postId, title, hash);
+        emit PostCreated(postId, title, hash, true);
     }
 
     function fetchPosts() public view returns (Post[] memory) {
         uint256 itemCount = _postIds.current();
+
         Post[] memory posts = new Post[](itemCount);
         for (uint256 i = 0; i < itemCount; i++) {
             uint256 currentId = i + 1;
@@ -80,7 +81,7 @@ contract Blog {
     ) public onlyOwner {
         Post storage post = idToPost[postId];
         post.title = title;
-        post.published = published;
+        post.published = true;
         post.content = hash;
         idToPost[postId] = post;
         hashToPost[hash] = post;
