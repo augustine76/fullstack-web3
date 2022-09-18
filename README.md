@@ -20,20 +20,18 @@ NEXT_PUBLIC_PK=<private key>
 
 ```bash
 $ npm install -g @graphprotocol/graph-cli
-
 # or
-
 $ yarn global add @graphprotocol/graph-cli
 ```
 
-1. Initialize using the deployed contract address
+2. Initialize using the deployed contract address
 
 ```bash
 $ graph init --from-contract your-contract-address \
 --network mumbai --contract-name Blog --index-events
 ```
 
-1. Run `graph codegen`
-2. Run `graph build`
-3. Get Access Key from the Graph dashboard and then run `graph auth`
-4. To deploy the subgraph, run `yarn deploy` from within the subgraph directory.
+3. Run `graph codegen` to generate code from your GraphQL schema.
+4. Run `graph build` to build.
+5. Get Access Key from the Graph dashboard and then run `graph auth`
+6. To deploy the subgraph, run `yarn deploy` from within the subgraph directory.
